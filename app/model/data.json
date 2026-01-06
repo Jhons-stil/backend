@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nama": "Ahmad Fauzi",
+    "umur": 19,
+    "jurusan": "Teknik Informatika",
+    "asal": "Bandung",
+    "status": "aktif"
+  },
+  {
+    "id": 2,
+    "nama": "Muhammad Rizky",
+    "umur": 20,
+    "jurusan": "Sistem Informasi",
+    "asal": "Jakarta",
+    "status": "aktif"
+  },
+  {
+    "id": 3,
+    "nama": "Abdul Karim",
+    "umur": 21,
+    "jurusan": "Manajemen Informatika",
+    "asal": "Cirebon",
+    "status": "cuti"
+  },
+  {
+    "id": 4,
+    "nama": "Hafizh Ramadhan",
+    "umur": 18,
+    "jurusan": "Rekayasa Perangkat Lunak",
+    "asal": "Tasikmalaya",
+    "status": "aktif"
+  },
+  {
+    "id": 5,
+    "nama": "Fajar Maulana",
+    "umur": 22,
+    "jurusan": "Teknik Komputer",
+    "asal": "Garut",
+    "status": "lulus"
+  }
+]
