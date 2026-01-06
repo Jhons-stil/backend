@@ -1,0 +1,7 @@
+ - kalau mau bikin projek baru node js, jalankan perintah
+    npm init -y
+
+    
+ - di file package.json gabisa isi sama komentar
+ - default projek node js adalah common js
+ - jika mau pake metode export import (ESmodule), di file package nya harus tambahin type: "module" 
