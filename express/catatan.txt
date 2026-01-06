@@ -1,0 +1,14 @@
+1. Express adalah kerangka kerja (framework) untuk web node.js 
+    yang dirancang untuk membangun aplikasi web dan API dengan cepat dan efisien
+2. Fitur Utama
+    - routing
+    - Template
+    - Middleware
+    - Method http
+    - Integrasi Database
+    - Kolaborasi antar teknologi (API)
+3. Memulai projek baru
+    - Buat folder baru 
+
+
+Jika kalian mengakses localhost:3000 kalian lagi mengakses url Root dengan ditandai (/)
