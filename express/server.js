@@ -4,6 +4,7 @@ import express from "express";
 const app = express();
 
 // ini url root
+// yang pertama kali ditampilkan
 app.get("/", (req, res) => {
   // cek isi req & res
   console.log(res.statusCode);

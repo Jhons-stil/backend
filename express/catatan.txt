@@ -11,4 +11,4 @@
     - Buat folder baru 
 
 
-Jika kalian mengakses localhost:3000 kalian lagi mengakses url Root dengan ditandai (/)
+Jika kalian mengakses localhost:3000 kalian lagi mengakses url Root dengan ditandai (/) dan itu yang pertama kali ditampilkan
