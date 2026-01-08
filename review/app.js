@@ -63,6 +63,12 @@ app.post("/santri", (req, res) => {
 
 app.delete("/santri/:id", (req, res) => {
   const id = req.params.id;
+  // findIndex: mencari posisi array yang ada dinma letaknya
+  // yang dikembalikan dari findIndex itu index array nya, bukan nilai dari id yang dibandingkan
+  // nahh kalau dia gak ketemu id yang sama, maka findIndex akan mengembalikan nilai index -1
+
+  // splice
+  // hapus data array berdasarkan index
   const parse = data.findIndex((datas) => datas.id === parseInt(id));
 
   data.splice(parse, 1);
