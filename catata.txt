@@ -1,0 +1,4 @@
+1. di postmant 
+dalam membuat endpoint pastikan selalu istiqomah buat penamaan endpointnya contoh /santri brati awalannya kalo mau bikin endpoint harus diawali dengan /santri
+
+
