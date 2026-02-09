@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM("admin", "user", "kabagppa", "kabagumum"),
         defaultValue: "user",
       },
-      profile: {
+      profil: {
         type: DataTypes.STRING,
       },
     },

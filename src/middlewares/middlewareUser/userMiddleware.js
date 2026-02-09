@@ -5,13 +5,20 @@ const { User } = db;
 const cekError = (req, res, next) => {
   const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
+  if (!errors.isEmpty() || req.validatorFileError) {
     const arrayError = errors.array().map((err) => {
       return {
         field: err.path,
         message: err.msg,
       };
     });
+
+    if (req.validatorFileError) {
+      arrayError.push({
+        field: "profil",
+        message: req.validatorFileError,
+      });
+    }
     return resGagal(res, 400, "error", "Terjadi kesalahan", arrayError);
   }
   next();
@@ -68,8 +75,23 @@ const cekCreateUser = [
   body("email")
     .notEmpty()
     .withMessage("Email wajib diisi")
+    .bail()
     .isEmail()
-    .withMessage("Format email tidak valid"),
+    .withMessage("Format email tidak valid")
+    .custom(async (value) => {
+      const user = await User.findOne({ where: { Email: value } });
+
+      if (user) {
+        throw new Error("Email sudah ada, silakan isi yang lain");
+      }
+      return true;
+    }),
+  body("role")
+    .optional()
+    .trim()
+    .toLowerCase()
+    .isIn(["admin", "user", "kabagppa", "kabagumum"])
+    .withMessage("Role tidak valid!!"),
   body("password")
     .notEmpty()
     .withMessage("Password wajib diisi")
@@ -88,12 +110,14 @@ const cekUpdateUser = [
   body("username")
     .notEmpty()
     .withMessage("Username wajib diisi")
+    .bail()
     .isLength({ min: 5 })
     .bail()
     .withMessage("Username minimal 5 karakter"),
   body("email")
     .notEmpty()
     .withMessage("Email wajib diisi")
+    .bail()
     .isEmail()
     .withMessage("Format email tidak valid"),
 ];

@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.ENUM("admin", "user", "kabagppa", "kabagumum"),
         defaultValue: "user",
       },
-      profile: {
+      profil: {
         type: Sequelize.STRING,
       },
       createdAt: {

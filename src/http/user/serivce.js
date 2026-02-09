@@ -22,7 +22,7 @@ const ubahUser = async (id, body) => {
 
 const hapusUser = async (id) => {
   return await User.destroy({
-    where: { id_buku: id },
+    where: { id: id },
   });
 };
 const findUsername = async (username) => {

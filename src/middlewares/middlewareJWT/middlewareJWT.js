@@ -7,7 +7,12 @@ const verifyToken =
     try {
       const authHeader = req.headers.authorization;
       if (!authHeader) {
-        return resGagal(res, 401, "error", "Token tidak ada");
+        return resGagal(
+          res,
+          401,
+          "error",
+          "Maaf, token tidak ada, silakan login",
+        );
       }
 
       const token = authHeader.split(" ")[1];
@@ -19,11 +24,16 @@ const verifyToken =
       req.user = decode;
 
       if (roles.length && !roles.includes(decode.role)) {
-        return resGagal(res, 403, "error", "Akses ditolak");
+        return resGagal(res, 403, "error", "Maaf, akses ditolak");
       }
       next();
     } catch (error) {
-      return resGagal(res, 401, "error", error.message);
+      return resGagal(
+        res,
+        401,
+        "error",
+        "Maaf, token tidak valid atau kadaluarsa",
+      );
     }
   };
 

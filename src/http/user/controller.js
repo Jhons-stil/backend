@@ -18,13 +18,7 @@ const token = require("../../payloads/toknJwt.js");
 
 const register = async (req, res) => {
   try {
-    const {
-      nama,
-      username,
-      email,
-      password,
-      "konfirmasi-password": konfirmasi_password,
-    } = req.body;
+    const { nama, username, email, password, konfirmasi_password } = req.body;
     const salt = Number(process.env.BCRYPT_SALT);
     const passwordAcak = await bcrypt.hash(password, salt);
     const body = {
@@ -80,10 +74,10 @@ const createUser = async (req, res) => {
     const salt = Number(process.env.BCRYPT_SALT);
     const passwrdAcak = await bcrypt.hash(password, salt);
 
-    let profile = null;
+    let profil = null;
 
     if (req.file) {
-      profile = path.basename(req.file.path);
+      profil = path.basename(req.file.path);
     }
 
     const body = {
@@ -92,7 +86,7 @@ const createUser = async (req, res) => {
       email,
       password: passwrdAcak,
       role,
-      profile,
+      profil,
     };
     const data = await tambahUser(body);
     return resSukses(res, 201, "success", "Data berhasil ditambahkan", data);
@@ -110,14 +104,15 @@ const readUser = async (req, res) => {
 };
 const updateUser = async (req, res) => {
   try {
-    const id = req.params.id;
-    const { nama, username, email, role } = req.body;
-    const profile = req.file ? path.basename(req.file.path) : undefined;
-    const dataNew = { nama, username, email, profile, role };
+    const user = req.user;
+
+    const { nama, username, email } = req.body;
+    const profil = req.file ? path.basename(req.file.path) : undefined;
+    const dataNew = { nama, username, email, profil };
     if (req.file) {
-      const user = await cariUserById(id);
-      if (user && user.profile) {
-        const fotoLama = path.join(__dirname, "../../uploads", user.profile);
+      await cariUserById(req.user.id);
+      if (user && user.profil) {
+        const fotoLama = path.join(__dirname, "../../uploads", user.profil);
         try {
           await fs.access(fotoLama);
           await fs.unlink(fotoLama);
@@ -127,7 +122,7 @@ const updateUser = async (req, res) => {
       }
     }
 
-    const data = await ubahUser(id, dataNew);
+    const data = await ubahUser(user.id, dataNew);
     return resSukses(res, 200, "success", "Data berhasil diubah", data);
   } catch (error) {
     return resGagal(res, 500, "error", error.message);
@@ -161,6 +156,19 @@ const updatePassword = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const id = req.params.id;
+    const userId = req.user.id;
+    if (id !== userId) {
+      return resGagal(
+        res,
+        400,
+        "error",
+        "Anda tidak bisa menghapus akun orang lain!!!",
+      );
+    }
+
+    // if (req.user.role !== "admin") {
+    //   return resGagal(res, 400, "error", "Hanya admin yang bisa menghapus!!!");
+    // }
     await hapusUser(id);
     return resSukses(res, 201, "success", "Data berhasil dihapus");
   } catch (error) {

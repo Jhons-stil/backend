@@ -6,6 +6,7 @@ const {
   readUser,
   updateUser,
   updatePassword,
+  deleteUser,
 } = require("./controller");
 const {
   cekError,
@@ -23,19 +24,20 @@ router.post("/auth/login", login);
 router.post(
   "/masterdata/tambah/user",
   verifyToken(["admin"]),
-  upload.single("profile"),
+  upload.single("profil"),
   cekCreateUser,
   cekError,
   createUser,
 );
 router.get("/masterdata/user", readUser);
 router.patch(
-  "/masterdata/user/update/:id",
+  "/masterdata/user/update",
   verifyToken(["user"]),
-  upload.single("profile"),
+  upload.single("profil"),
   cekUpdateUser,
   cekError,
   updateUser,
 );
 router.patch("/masterdata/user/ubahPw", verifyToken(["user"]), updatePassword);
+router.delete("/masterdata/user/delete/:id", verifyToken(["user"]), deleteUser);
 module.exports = router;

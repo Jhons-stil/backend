@@ -1,13 +1,17 @@
 process.env.TZ = "Asia/Jakarta";
 const express = require("express");
 const routerUser = require("./http/user/router.js");
+const routerKaryawan = require("./http/karyawan/router.js");
+const router = require("./http/cuti/router.js");
+
 const app = express();
 const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routerUser);
-
+app.use("/api/masterdata/karyawan", routerKaryawan);
+app.use("/api/cuti", router);
 app.listen(PORT, () => {
   console.log("server Berjalan.................");
 });

@@ -22,7 +22,7 @@ const ubahKaryawan = async (id, body) => {
 
 const hapusKaryawan = async (id) => {
   return await Karyawan.destroy({
-    where: { id_buku: id },
+    where: { id: id },
   });
 };
 const byId = async (id) => {

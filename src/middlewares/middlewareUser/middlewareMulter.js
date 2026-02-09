@@ -19,7 +19,8 @@ const fileFilter = (req, file, cb) => {
   if (allowTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("file harus PNG, JPG dan JPEG"), false);
+    req.validatorFileError = "file harus PNG, JPG dan JPEG";
+    cb(null, false);
   }
 };
 const upload = multer({

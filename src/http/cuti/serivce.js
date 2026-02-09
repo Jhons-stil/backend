@@ -22,7 +22,7 @@ const ubahCuti = async (id, body) => {
 
 const hapusCuti = async (id) => {
   return await Cuti.destroy({
-    where: { id_buku: id },
+    where: { id: id },
   });
 };
 const byId = async (id) => {
