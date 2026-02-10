@@ -32,12 +32,20 @@ router.post(
 router.get("/masterdata/user", readUser);
 router.patch(
   "/masterdata/user/update",
-  verifyToken(["user"]),
+  verifyToken(["admin", "user", "kabagppa", "kabagumum"]),
   upload.single("profil"),
   cekUpdateUser,
   cekError,
   updateUser,
 );
-router.patch("/masterdata/user/ubahPw", verifyToken(["user"]), updatePassword);
-router.delete("/masterdata/user/delete/:id", verifyToken(["user"]), deleteUser);
+router.patch(
+  "/masterdata/user/ubahPw",
+  verifyToken(["admin", "user", "kabagppa", "kabagumum"]),
+  updatePassword,
+);
+router.delete(
+  "/masterdata/user/delete/:id",
+  verifyToken(["admin", "user", "kabagppa", "kabagumum"]),
+  deleteUser,
+);
 module.exports = router;

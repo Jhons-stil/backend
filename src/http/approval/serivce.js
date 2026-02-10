@@ -22,11 +22,11 @@ const ubahApprov = async (id, body) => {
 
 const hapusApprov = async (id) => {
   return await Approval.destroy({
-    where: { id_buku: id },
+    where: { id: id },
   });
 };
 const byId = async (id) => {
-  return await Approval.findByPk(id);
+  return await Approval.findOne({ where: { cutiId: id } });
 };
 
 module.exports = {
