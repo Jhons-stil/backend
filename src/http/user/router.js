@@ -29,7 +29,7 @@ router.post(
   cekError,
   createUser,
 );
-router.get("/masterdata/user", readUser);
+router.get("/masterdata/user", verifyToken(["admin"]), readUser);
 router.patch(
   "/masterdata/user/update",
   verifyToken(["admin", "user", "kabagppa", "kabagumum"]),

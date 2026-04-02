@@ -157,7 +157,8 @@ const deleteUser = async (req, res) => {
   try {
     const id = req.params.id;
     const userId = req.user.id;
-    if (id !== userId) {
+
+    if (id !== String(userId)) {
       return resGagal(
         res,
         400,
@@ -166,9 +167,6 @@ const deleteUser = async (req, res) => {
       );
     }
 
-    // if (req.user.role !== "admin") {
-    //   return resGagal(res, 400, "error", "Hanya admin yang bisa menghapus!!!");
-    // }
     await hapusUser(id);
     return resSukses(res, 201, "success", "Data berhasil dihapus");
   } catch (error) {

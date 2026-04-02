@@ -5,6 +5,7 @@ const {
   updateKaryawan,
   deleteKaryawan,
   cariById,
+  readKaryawanProfile,
 } = require("./controller");
 const {
   cekCreate,
@@ -12,6 +13,9 @@ const {
 } = require("../../middlewares/middlewareKaryawan/middlewareKaryawan");
 const { cekError } = require("../../middlewares/middlewareUser/userMiddleware");
 const verifyToken = require("../../middlewares/middlewareJWT/middlewareJWT");
+const {
+  cekEndpoint,
+} = require("../../middlewares/middlewareEndpoint/middlewareEndpoint");
 const router = express.Router();
 
 router.post(
@@ -31,5 +35,11 @@ router.patch(
   updateKaryawan,
 );
 router.delete("/delete/:id", verifyToken(["admin"]), cekId, deleteKaryawan);
+router.get(
+  "/profil",
+  verifyToken(["admin", "user", "kabagppa", "kabagumum"]),
+  readKaryawanProfile,
+);
 router.get("/:id", verifyToken(["admin"]), cekId, cariById);
+
 module.exports = router;

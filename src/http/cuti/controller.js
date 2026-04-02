@@ -5,6 +5,8 @@ const { tambahCuti, ubahCuti, cariCutiById, hapusCuti } = require("./serivce");
 const createCuti = async (req, res) => {
   try {
     const user = req.user;
+    console.log(user.id);
+
     const { tgl_mulai, tgl_selesai, alasan } = req.body;
     const body = { tgl_mulai, tgl_selesai, alasan, userId: user.id };
 

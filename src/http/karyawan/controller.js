@@ -1,10 +1,12 @@
 const { resSukses, resGagal } = require("../../payloads/paylad");
+
 const {
   tambahKaryawan,
   tampilKaryawan,
   hapusKaryawan,
   ubahKaryawan,
   cariKaryawanById,
+  findUsername,
 } = require("./serivce");
 
 require("bcrypt");
@@ -60,11 +62,27 @@ const cariById = async (req, res) => {
     return resGagal(res, 500, "error", error.message);
   }
 };
+const readKaryawanProfile = async (req, res) => {
+  try {
+    const user = req.user;
 
+    let data = null;
+    if (user.role !== "admin") {
+      data = await findUsername(user.username);
+    } else {
+      data = await tampilKaryawan();
+    }
+
+    res.status(200).json({ data });
+  } catch (error) {
+    return resGagal(res, 500, "error", error.message);
+  }
+};
 module.exports = {
   createKaryawan,
   readKaryawan,
   updateKaryawan,
   deleteKaryawan,
   cariById,
+  readKaryawanProfile,
 };

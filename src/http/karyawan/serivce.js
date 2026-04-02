@@ -29,6 +29,12 @@ const byId = async (id) => {
   return await Karyawan.findByPk(id);
 };
 
+const findUsername = async (username) => {
+  return await Karyawan.findOne({
+    where: { username },
+  });
+};
+
 module.exports = {
   tambahKaryawan,
   tampilKaryawan,
@@ -36,4 +42,5 @@ module.exports = {
   ubahKaryawan,
   hapusKaryawan,
   byId,
+  findUsername,
 };
